@@ -57,7 +57,6 @@ def music():
         for row in reader:
             new_row = row[0].split(" | ")
             music_list.append(((new_row[0], new_row[1]), (int(new_row[2]), new_row[3], new_row[4])))
-        print(music_list)
         return music_list
 
 
