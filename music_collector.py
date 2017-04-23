@@ -45,8 +45,8 @@ def main():
         elif action == "0":
             quit()
         else:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print("Wrong command. Choose one number from the list above.")
+            os.system('clear')
+            print("Wrong command. Choose one number from the list.")
 
 
 def music():
@@ -55,14 +55,15 @@ def music():
     with open("music.csv", "r") as f:
         reader = csv.reader(f)
         for row in reader:
-            new_row = row[0].split(" | ")
-            music_list.append(((new_row[0], new_row[1]), (int(new_row[2]), new_row[3], new_row[4])))
+            if row and "|" in row[0]:  # ignore empty lines and wrong format strings
+                new_row = row[0].split(" | ")
+                music_list.append(((new_row[0], new_row[1]), (int(new_row[2]), new_row[3], new_row[4])))
         return music_list
 
 
 def add_album():
     """Add new album to the file"""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     print("Type the informations about new album.")
     while True:
         artist = input("name of artist: ")
@@ -102,12 +103,12 @@ def add_album():
         writer.writerow(["%s | %s | %d | %s | %s" % (artist, album, year, genre, length)])
     print("\nPress enter to continue")
     input()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
 
 
 def find_by_artist():
     """Search album by artist"""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     music_list = music()
     name = input("Enter the name of the artist: ")
     occurrence = 0
@@ -119,12 +120,12 @@ def find_by_artist():
         print("\nThere is no album of %s on this music list." % name)
     print("\nPress enter to continue")
     input()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
 
 
 def find_by_year():
     """Search album by year"""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     music_list = music()
     while True:
         year = input("Enter the year of the release of the album: ")
@@ -143,12 +144,12 @@ def find_by_year():
         print("there is no album from this year on this music list.")
     print("\nPress enter to continue")
     input()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
 
 
 def find_by_album():
     """Search musician by album"""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     music_list = music()
     album = input("Enter the name of the album: ")
     occurrence = 0
@@ -160,12 +161,12 @@ def find_by_album():
         print("\nThere is no album '%s' on this music list." % album)
     print("\nPress enter to continue")
     input()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
 
 
 def find_by_letters():
     """Search album by input letters"""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     music_list = music()
     while True:
         letters = input("Write a part of the album's title: ")
@@ -182,12 +183,12 @@ def find_by_letters():
         print("There is no album with '%s' in the title." % letters)
     print("\nPress enter to continue")
     input()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
 
 
 def find_by_genre():
     """Search albums by genre"""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     music_list = music()
     genre = input("Enter the genre of the music: ")
     print("%s: " % genre)
@@ -200,12 +201,12 @@ def find_by_genre():
         print("there is no album from this genre on this music list.")
     print("\nPress enter to continue")
     input()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
 
 
 def albums_age():
     """Print the age of all albums"""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     current_year = datetime.now().year
     music_list = music()
     print("The age of albums:")
@@ -214,12 +215,12 @@ def albums_age():
         print("%s: %s - %d years old" % (item[0][0], item[0][1], album_age))
     print("\nPress enter to continue")
     input()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
 
 
 def random_by_genre():
     """Choose random album by genre"""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     music_list = music()
     genre = input("Enter the genre of the music: ")
     print("%s album:" % genre)
@@ -234,12 +235,12 @@ def random_by_genre():
         print("there is no %s album on this music list." % genre)
     print("\nPress enter to continue")
     input()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
 
 
 def how_many_albums():
     """Print the amount of artist's albums"""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     music_list = music()
     name = input("Enter the name of the artist: ")
     albums_amount = 0
@@ -252,12 +253,12 @@ def how_many_albums():
         print("%s: %d albums" % (item[0][0], albums_amount))
     print("\nPress enter to continue")
     input()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
 
 
 def longest_album():
     """Print the longest album"""
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
     music_list = music()
     length_list = []
     for item in music_list:
@@ -267,7 +268,7 @@ def longest_album():
         music_list[longest_index][0][0], music_list[longest_index][0][1], length_list[longest_index]))
     print("\nPress enter to continue")
     input()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('clear')
 
 
 main()
